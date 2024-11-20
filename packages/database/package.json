@@ -2,10 +2,13 @@
   "name": "@repo/db",
   "version": "0.0.0",
   "dependencies": {
-    "@prisma/client": "5.22.0"
+    "@prisma/client": "5.22.0",
+    "prisma-client-43278c12b31673e1ec3638370ba3485ed97ed510ab3108b604075c92f2af2fa3": "link:prisma\\prisma-client"
   },
   "devDependencies": {
-    "prisma": "5.22.0"
+    "@types/node": "^22.5.1",
+    "prisma": "5.22.0",
+    "tsx": "^4.17.0"
   },
   "scripts": {
     "db:start": "docker-compose up",
