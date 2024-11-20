@@ -1,9 +1,19 @@
-import { Router } from 'express'
-import { prisma } from '../db'
+import express, { Express } from "express";
+import { prisma } from "../lib/PrismaClient";
+import { ProductService } from "../services/product.service";
 
-export const router = Router();
+export function productsRoute(app: Express):void {
+    const router = express.Router()
+    app.use('/api/products', router)
+    const service = new ProductService();
 
-router.get('/', async (req, res) => {
-    const products = await prisma.product.findMany()
-    res.json(products);
-})
+    router.get('/', async function name(req_, res, next){
+        try {
+            const result = await service.getAllProducts()
+            return res.json({ result })
+        }catch(error){
+            next(error)
+        }
+    })
+
+}
