@@ -17,7 +17,7 @@ export class ProductController {
         await productService.deleteProduct(id);
         res.json({message:'deleted succesfully'});
     }
-    async updateProduct(req:Request, res: Response) {
+    async updateProduct(req:Request, res: Response) { // comment
         const id = parseInt(req.params.id);
         const productData = req.body;
         const product = await productService.updateProduct(id, productData);
