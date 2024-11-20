@@ -28,5 +28,4 @@ export class ProductController {
         const product = await productService.createProduct(productData);
         res.json(product);
     }
-
 }
