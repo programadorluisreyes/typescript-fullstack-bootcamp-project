@@ -15,4 +15,37 @@ export function productsRoute(app: Express):void {
         }
     })
 
+    router.get('/:id', async function name(req, res, next){
+        const id = parseInt(req.params.id)
+        try {
+            const result = await service.getProductById(id)
+            return res.json({ result })
+        }catch(error){
+            next(error)
+        }
+    })
+
+    router.post('/', async function name(req, res, next){
+        const data = req.body;
+        console.log(data)
+        try {
+            const result = await service.createProduct(data)
+            return res.json({ result })
+        }catch(error){
+            next(error)
+        }
+    })
+
+    router.put('/:id', async function name(req, res, next){
+        const data = req.body;
+        const id = parseInt(req.params.id)
+        
+        try {
+            const result = await service.updateProduct(id, data)
+            return res.json({ result })
+        }catch(error){
+            next(error)
+        }
+    })
+
 }

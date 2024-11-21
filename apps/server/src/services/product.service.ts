@@ -14,6 +14,7 @@ export class ProductService {
         return prisma.product.findUnique({ where:{ id } });
     }
     async createProduct(data: any) {
+        console.log(data)
         return prisma.product.create({ data });
     }
     async updateProduct(id:number, data:any) {
