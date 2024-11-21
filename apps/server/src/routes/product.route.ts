@@ -1,5 +1,4 @@
 import express, { Express } from "express";
-import { prisma } from "../lib/PrismaClient";
 import { ProductService } from "../services/product.service";
 
 export function productsRoute(app: Express):void {

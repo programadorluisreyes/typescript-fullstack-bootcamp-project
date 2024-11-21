@@ -4,7 +4,7 @@ import { Product } from "../model/product.model";
 export class ProductService {
     async getAllProducts(): Promise<Product[]> {
         const products = await prisma.product.findMany();
-
+        console.log(products)
         return products.map(product => ({
             name: product.name,
             description:product.description
