@@ -9,7 +9,7 @@ export function productsRoute(app: Express):void {
     router.get('/', async function name(req_, res, next){
         try {
             const result = await service.getAllProducts()
-            return res.json({ result })
+            return res.json(result)
         }catch(error){
             next(error)
         }
@@ -19,7 +19,7 @@ export function productsRoute(app: Express):void {
         const id = parseInt(req.params.id)
         try {
             const result = await service.getProductById(id)
-            return res.json({ result })
+            return res.json(result)
         }catch(error){
             next(error)
         }
