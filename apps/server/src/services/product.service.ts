@@ -1,17 +1,24 @@
 import { prisma } from "../lib/PrismaClient";
 import { Product } from "../model/product.model";
+import { Variant } from "../model/variant.model";
 
 export class ProductService {
-    async getAllProducts(): Promise<Product[]> {
-        const products = await prisma.product.findMany();
-        console.log(products)
-        return products.map(product => ({
-            name: product.name,
-            description:product.description
-        }))
+    async getAllProducts():Promise<Product> {
+        return prisma.product.findMany({
+            include: {
+                variants:true
+            },            
+        });
+        
+    
     }
     async getProductById(id: number) {
-        return prisma.product.findUnique({ where:{ id } });
+        return prisma.product.findUnique({
+            include: {
+                variants:true
+            },
+            where:{ id } ,
+        });
     }
     async createProduct(data: any) {
         console.log(data)
