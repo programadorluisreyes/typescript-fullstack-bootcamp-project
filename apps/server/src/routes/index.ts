@@ -8,6 +8,17 @@ import express, { Express } from "express";
 export function productsRoute(app: Express):void {
     const router = express.Router()
     app.use('/api/products', router)
+    
+
+
+    //router.get('/', productController.getAllProducts);
+    //router.get('/:id', productController.getProductById);
+
+}
+
+export function collectionsRoute(app: Express):void {
+    const router = express.Router()
+    app.use('/api/collections', router)
 
 
     //router.get('/', productController.getAllProducts);
