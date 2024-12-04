@@ -9,9 +9,49 @@ export class ProductService {
                 variants:true
             },            
         });
-        
-    
     }
+
+    async searchProduct(name:string):Promise<Product> {
+        return prisma.product.findMany({
+            where: {
+                
+                  name: {
+                    contains: name,
+                  },
+                
+              },
+            include: {
+                variants:true
+            },            
+        });
+    }
+
+    async getAllProductsDesc():Promise<Product> {
+        return prisma.product.findMany({
+            orderBy: [
+                {
+                  price: 'desc',
+                },
+              ],
+            include: {
+                variants:true
+            },
+        });
+    }
+
+    async getAllProductsAsc():Promise<Product> {
+        return prisma.product.findMany({
+            orderBy: [
+                {
+                  price: 'asc',
+                },
+              ],
+            include: {
+                variants:true
+            },
+        });
+    }
+
     async getProductById(id: number) {
         return prisma.product.findUnique({
             include: {

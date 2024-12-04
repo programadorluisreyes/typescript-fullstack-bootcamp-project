@@ -14,11 +14,38 @@ export function productsRoute(app: Express):void {
             next(error)
         }
     })
+    router.get('/desc', async function name(req_, res, next){
+        try {
+            const result = await service.getAllProductsDesc()
+            return res.json(result)
+        }catch(error){
+            next(error)
+        }
+    })
+
+    router.get('/asc', async function name(req_, res, next){
+        try {
+            const result = await service.getAllProductsAsc()
+            return res.json(result)
+        }catch(error){
+            next(error)
+        }
+    })
 
     router.get('/:id', async function name(req, res, next){
         const id = parseInt(req.params.id)
         try {
             const result = await service.getProductById(id)
+            return res.json(result)
+        }catch(error){
+            next(error)
+        }
+    })
+
+    router.get('/search/:text', async function name(req, res, next){
+        const text = req.params.text
+        try {
+            const result = await service.searchProduct(text)
             return res.json(result)
         }catch(error){
             next(error)

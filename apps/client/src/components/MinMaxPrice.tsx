@@ -5,29 +5,18 @@ import { Product } from '../models/Product.model'
 
 interface MinMaxProps {
     array: Array<Product>,
-    setArray: Dispatch<SetStateAction<Array<Product>>>,
+    setArray:Dispatch<SetStateAction<Array<Product>>>,
+    fn1: () => void,
+    fn2: () => void,
 }
-const MinMaxPrice = ({ array, setArray }: MinMaxProps): JSX.Element => {
+const MinMaxPrice = ({ array, setArray, fn1, fn2 }: MinMaxProps): JSX.Element => {
     const [enabled, setEnabled] = useState(false)
-    const ordenarMinMax = ():void => {
-        const poductsCopia = structuredClone(array);
-        const datos:Array<Product> = poductsCopia.sort( (a,b) => a.price - b.price)
-        console.log(datos)
-        setArray(datos)
-    }
-
-    const ordenarMaxMin = ():void => {
-        const poductsCopia = structuredClone(array);
-        const datos:Array<Product> = poductsCopia.sort( (a,b) => b.price - a.price)
-        console.log(datos)
-        setArray(datos)
-      }
 
   useEffect(() => {
     if(enabled){
-        ordenarMaxMin()
+        fn1()
     }else{
-        ordenarMinMax()
+        fn2()
     }
   }, [enabled]);
   
