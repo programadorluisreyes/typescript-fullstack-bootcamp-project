@@ -13,6 +13,7 @@ export const Route = createFileRoute('/product/$id')({
 function ProductComponent() {
   const { id } = Route.useParams();
   const product = Route.useLoaderData();
+  console.log(product)
   
   return (
     <div className="bg-white flex justify-center flex-row w-full mt-4 rounded-md">

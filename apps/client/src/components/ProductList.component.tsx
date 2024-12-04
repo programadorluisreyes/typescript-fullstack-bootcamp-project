@@ -48,29 +48,51 @@ const ProductList = (): JSX.Element => {
   console.log(json)
   setProducts(json)
   setProductsOriginal(json)
- }  
+ }
+
+ const searchProduct = async (param:string) => {
+  const response = await fetch(`http://localhost:5001/api/products/search/${param}`)
+  const json = await response.json()
+  setProducts(json)
+ }
+
+ const getProductsAsc = async () => {
+  const response = await fetch('http://localhost:5001/api/products/asc')
+  const json = await response.json()
+  console.log(json)
+  setProducts(json)
+  setProductsOriginal(json)
+ }
+
+ const getProductsDesc = async () => {
+  const response = await fetch('http://localhost:5001/api/products/desc')
+  const json = await response.json()
+  console.log(json)
+  setProducts(json)
+  setProductsOriginal(json)
+ }
 
  const getCollections = async () => {
   const response = await fetch('http://localhost:5001/api/collections/')
   const json = await response.json()
   console.log(json)
   setCollections(json)
- }  
+ }
+
+ 
 
 
  
  // this example is not case sensitive
 
-const searchResults = products.filter(item => {
-  const regex = new RegExp(searchText, 'i'); // 'i' makes the search case-insensitive
-  return regex.test(item.name); // ready to assign to a state
-});
 
+let timeout:ReturnType<typeof setTimeout>;
 useEffect(() => {
   if(!searchText){
     setProducts(productsOriginal)
   }else{
-    setProducts(searchResults)
+    clearTimeout(timeout);
+    timeout = setTimeout(() => searchProduct(`${searchText}`), 1000)
   }
 }, [searchText])
 
@@ -124,6 +146,8 @@ useEffect(() => {
           <MinMaxPrice
             array={products}
             setArray={setProducts}
+            fn1={getProductsDesc}
+            fn2={getProductsAsc}
             ></MinMaxPrice>
             </div>
         </div>
